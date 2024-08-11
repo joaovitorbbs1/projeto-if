@@ -41,7 +41,6 @@ public class ClienteDAO {
             clienteExistente.setEndereco(clienteAtualizado.getEndereco());
             clienteExistente.setTelefone(clienteAtualizado.getTelefone());
             clienteExistente.setEmail(clienteAtualizado.getEmail());
-            clienteExistente.setSenha(clienteAtualizado.getSenha());
             System.out.println("Cliente atualizado com sucesso!");
         }
     }

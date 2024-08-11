@@ -56,9 +56,6 @@ public class Principal {
 		clienteDAO.adicionarCliente(cliente2);
 		clienteDAO.adicionarCliente(cliente3);
 
-		cliente1.adicionarAoCarrinho(bicicleta1);
-		System.out.println(cliente1.exibirCarrinhoDeCompras());
-
 		// Listar clientes
 		System.out.println("\nLista de Clientes:");
 		for (Cliente c : clienteDAO.listarClientes()) {
