@@ -1,5 +1,6 @@
 package projeto.principal;
 
+import java.util.Scanner;
 import projeto.modelos.Cliente;
 import projeto.modelos.Produto;
 import projeto.modelosDAO.ClienteDAO;
@@ -8,9 +9,24 @@ import projeto.modelosDAO.ProdutoDAO;
 public class Principal {
 	//
 	public static void main(String[] args) {
+		
+		Scanner leitor = new Scanner(System.in);
 		ProdutoDAO bicicletaDAO = new ProdutoDAO();
 		ClienteDAO clienteDAO = new ClienteDAO();
+		
+		String user;
+		String senha;
+		
+		do {
+			System.out.println("User: ");
+			user = leitor.nextLine();
 
+			System.out.println("Senha: ");
+			senha = leitor.nextLine();
+		} while (!(user.equals("root")) || !(senha.equals("1234")));
+		
+		//menu provisório em andamento(se necessário)
+		
 		// Criar e adicionar bicicletas
 		Produto bicicleta1 = new Produto("Mountain Bike", 1200.00, 15, 3);
 		Produto bicicleta2 = new Produto("Bicicleta Elétrica", 3500.00, 5, 1);
@@ -55,5 +71,6 @@ public class Principal {
 
 		// Remover cliente
 		clienteDAO.removerCliente(2);
+		leitor.close();
 	}
 }
