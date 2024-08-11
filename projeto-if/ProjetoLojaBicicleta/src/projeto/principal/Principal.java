@@ -6,7 +6,7 @@ import projeto.modelos.Cliente;
 import projeto.modelos.Produto;
 
 public class Principal {
-
+	//
 	public static void main(String[] args) {
 		ProdutoDAO bicicletaDAO = new ProdutoDAO();
 		ClienteDAO clienteDAO = new ClienteDAO();
