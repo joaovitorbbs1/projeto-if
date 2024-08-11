@@ -1,9 +1,9 @@
 package projeto.principal;
 
-import DAO.ClienteDAO;
-import DAO.ProdutoDAO;
 import projeto.modelos.Cliente;
 import projeto.modelos.Produto;
+import projeto.modelosDAO.ClienteDAO;
+import projeto.modelosDAO.ProdutoDAO;
 
 public class Principal {
 	//
