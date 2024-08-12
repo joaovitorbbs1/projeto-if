@@ -1,7 +1,6 @@
 package projeto.modelos;
 import java.util.Date;
 import java.util.List;
-import java.util.Scanner;
 
 public class Venda {
 	private int id;
@@ -11,16 +10,20 @@ public class Venda {
 	private double total;
 
 	public Venda(int id, Date data, Cliente cliente, List<Produto> listaDeProdutos) {
-		this.setId(id);
-		this.setData(data);
-		this.setCliente(cliente);
+		this.id = id;
+	    this.data = new Date();
+        this.cliente = cliente;;
 		this.listaDeProdutos = listaDeProdutos;
 		this.calcularTotal(total);
 	}
 
 	private void calcularTotal(double total2) {
 		// TODO Auto-generated method stub
-
+		 this.total = 0;
+	        for (Produto p : listaDeProdutos) {
+	            this.total += p.getPreco();
+	            p.reduzirEstoque(1);  // Assume que uma unidade de cada produto é vendida
+	        }
 	}
 
 	public Venda(int vendaId, Cliente cliente2, Object cliente3, List<Produto> calcularTotalCarrinho) {
@@ -31,14 +34,8 @@ public class Venda {
 		// TODO Auto-generated constructor stub
 	}
 
-	private void calcularTotal() {
-		this.setTotal(0);
-		for (Produto p : listaDeProdutos) {
-			this.setTotal(this.getTotal() + p.getPreco());
-		}
-	}
-
 	// Getters e setters
+
 
 	public int getId() {
 		return id;
@@ -78,46 +75,39 @@ public class Venda {
 
 	public void setListaDeProdutos(List<Produto> listaDeProdutos) {
 		this.listaDeProdutos = listaDeProdutos;
-		calcularTotal(); // Recalcula o total quando a lista de produtos é atualizada
+		calcularTotal(total); // Recalcula o total quando a lista de produtos é atualizada
 	}
 
 	// Métodos para inserir, emitir fatura, verificar estoque
-	//TEM QUE TERMINAR|!|!|!|!|!|!|!|!|!|!|! 
-	public void realizarComprar(List<Produto> carrinho, Cliente cliente) {
-		double precoTotal = 0;
-		for(Produto p : carrinho) {
-			System.out.println(p.toString());
-			precoTotal = precoTotal + (p.getPreco() * p.getQuantidadeCompra());
-		}
-		System.out.println("Preço Total: R$ " + precoTotal);
-		System.out.println("Confirma a compra? ");
+    // Adiciona um produto à venda e recalcula o total
+    public void adicionarProduto(Produto produto) {
+        this.listaDeProdutos.add(produto);
+        this.total += produto.getPreco();
+        produto.reduzirEstoque(1);
+    }
 
-		// Leitura da entrada do usuário para confirmar a compra
-		try (Scanner scanner = new Scanner(System.in)) {
-			String resposta = scanner.nextLine().trim().toLowerCase();
+    // Remove um produto da venda e recalcula o total
+    public void removerProduto(Produto produto) {
+        if (this.listaDeProdutos.remove(produto)) {
+            this.total -= produto.getPreco();
+            produto.aumentarEstoque(1);
+        }
+    }
 
-			if (resposta.equals("s")) { 
-				this.data = new Date();
-				this.cliente = cliente;
-				this.listaDeProdutos = carrinho;
-				calcularTotal();
+    // Método para imprimir o resumo da venda
+    public void imprimirResumo() {
+        System.out.println("Venda ID: " + id);
+        System.out.println("Data: " + data);
+        System.out.println("Cliente: " + cliente.getNome());
+        System.out.println("Produtos:");
+        for (Produto p : listaDeProdutos) {
+            System.out.println(" - " + p.getNome() + " (Preço: " + p.getPreco() + ")");
+        }
+        System.out.println("Total: " + total);
+    }
 
-				atualizarEstoque(carrinho);
-
-				System.out.println("Compra realizada com sucesso!");
-			} else {
-				System.out.println("Compra cancelada.");
-			}
-		}
-	}
-
-	// Método para atualizar o estoque dos produtos
-	private void atualizarEstoque(List<Produto> carrinho) {
-		for (Produto p : carrinho) {
-			p.reduzirEstoque(p.getQuantidadeCompra());
-		}
-	}
 }
+
 
 
 
