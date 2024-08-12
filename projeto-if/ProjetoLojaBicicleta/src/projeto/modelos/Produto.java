@@ -1,20 +1,23 @@
 package projeto.modelos;
-public class Produto implements Comparable<Produto>{
-    private int id;
-    private String nome;
-    private double preco;
-    private int quantidadeCompra = 0;
-    private int quantidadeEmEstoque;
-    private int estoqueMinimo;
 
-    public Produto(String nome, double preco, int quantidadeEmEstoque, int estoqueMinimo) {
-        this.setNome(nome);
-        this.setPreco(preco);
-        this.setQuantidadeEmEstoque(quantidadeEmEstoque);
-        this.setEstoqueMinimo(estoqueMinimo);
-    }
-    
-    // Getters e setters
+public class Produto implements Comparable<Produto>{
+	private int id;
+	private String nome;
+	private double preco;
+	private int quantidadeCompra = 0;
+	private int quantidadeEmEstoque;
+	private int estoqueMinimo;
+
+	public Produto(String nome, double preco, int quantidadeEmEstoque, int estoqueMinimo) {
+		this.setNome(nome);
+		this.setPreco(preco);
+		this.setQuantidadeEmEstoque(quantidadeEmEstoque);
+		this.setEstoqueMinimo(estoqueMinimo);
+	}
+
+
+
+	// Getters e setters
 
 	public int getId() {
 		return id;
@@ -72,15 +75,25 @@ public class Produto implements Comparable<Produto>{
 
 	@Override
 	public String toString() {
+		// TODO Auto-generated method stub
 		return "\n" + nome + " Preco= R$ "+ preco;
 	}
 
 	public void reduzirEstoque(int quantidadeCompra2) {
+		int quantidade = 1;
 		// TODO Auto-generated method stub
-		
+		this.quantidadeEmEstoque -= quantidade;
+		if (this.quantidadeEmEstoque < this.estoqueMinimo) {
+			System.out.println("Alerta: Estoque do produto " + nome + " abaixo do mínimo!");
+		}
 	}
-	// Métodos para inserir, modificar, apagar, consultar e listar
 
+	public void aumentarEstoque(int quantidade) {
+		// TODO Auto-generated method stub
+		this.quantidadeEmEstoque += quantidade;
+	}
 }
+
+
 
 
